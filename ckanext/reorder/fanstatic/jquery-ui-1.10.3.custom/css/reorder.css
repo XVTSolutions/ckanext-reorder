@@ -1,0 +1,8 @@
+#sortable { list-style-type: none; margin: 0px 0px 20px 0px; padding: 0; width: 60%; }
+#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#sortable li span { position: absolute; margin-left: -1.3em; }
+
+#result-list { list-style-type: none; margin: 0px 0px 20px 0px; padding: 0; width: 60%; }
+#result-list li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#result-list li span { position: absolute; margin-left: -1.3em; }
+

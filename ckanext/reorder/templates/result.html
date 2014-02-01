@@ -1,0 +1,52 @@
+
+
+{% extends 'page.html' %}
+
+
+{% block breadcrumb_content %}
+  <li class="active">{{ 'Reorder' }}</li>
+{% endblock %}
+
+{% block primary_content %}
+<!-- module content -->
+<div class="module-content">
+
+    {% if not c.error %}
+        <!-- the sortable list -->
+        <ul id="result-list">
+          {% for res in c.resources %}
+            <li id="{{ res }}" class="ui-state-default"><span class=""></span>{{ res }}</li>
+          {% endfor %}
+        </ul> <!-- end sortable list -->
+        {% if c.link %}
+          <p>Go to {{ c.link }} page </p>
+        {% endif %}
+    {% endif %}
+
+</div> <!-- end module content -->
+{% endblock %}
+
+
+
+{% block secondary_content %}
+ <aside class="secondary">
+
+<div class="module module-narrow module-shallow">
+  <h2 class="module-heading">
+    <i class="icon-info-sign"></i>
+    Reorder
+  </h2>
+  <div class="module-content">
+     <p>Result. This is the current order of resources in <em>{{ c.name }}</em></p>
+     <a href="/reorder/{{ c.name }}">reorder again</a>
+  </div>
+</div>
+</aside>
+
+<!-- fanstatic resources -->
+{% resource 'ckanext-reorder/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.css' %}
+{% resource 'ckanext-reorder/jquery-ui-1.10.3.custom/css/reorder.css' %}
+{% resource 'ckanext-reorder/jquery-ui-1.10.3.custom/js/fix/jquery-ui-1.10.3.custom.js' %}
+<!-- end fanstatic resources -->
+
+{% endblock %}

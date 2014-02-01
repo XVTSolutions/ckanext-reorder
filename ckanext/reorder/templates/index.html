@@ -1,0 +1,71 @@
+{% extends 'page.html' %}
+
+{% block breadcrumb_content %}
+  <li class="active">{{ 'Reorder' }}</li>
+{% endblock %}
+
+{% block primary_content %}
+  <div class="module-content">
+    {% if c.view %}
+    <h2>Resources</h2>
+    {% if c.view and c.edit%}
+      <ul id="sortable">
+    {% elif not c.edit %}
+      <ul id="result-list">
+      {% endif %}
+        {% for res in c.resources %}
+        <li id="{{ res }}" class="resource ui-state-default"><span class="{% if c.edit %}ui-icon ui-icon-arrowthick-2-n-s{% endif %}"></span>{{ res }}</li>
+      {% endfor %}
+      </ul>
+
+    <form id="reorder_form" name="input" action="/reorder/result" method="post">
+      <input id="hidden-dataset" type="hidden" name="dataset" value="{{ c.name }}"/>
+      <input id="hidden-resources" type="hidden" name="resources" value=""/>
+      <button {% if not c.edit %}disabled="disabled"{% endif %} class="btn btn-primary" type="submit" id="submit">Reorder</button>
+    </form>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block secondary_content %}
+  <aside class="secondary">
+
+    <div class="module module-narrow module-shallow">
+      <h2 class="module-heading">
+        <i class="icon-info-sign"></i>Reorder
+      </h2>
+        <div class="module-content">
+          <p>The Reorder extension allows you to reorder the position dataset resources.</p>
+        </div>
+    </div>
+  </aside>
+
+<!-- fanstatic resources -->
+{% resource 'ckanext-reorder/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.css' %}
+{% resource 'ckanext-reorder/jquery-ui-1.10.3.custom/css/reorder.css' %}
+{% resource 'ckanext-reorder/jquery-ui-1.10.3.custom/js/fix/jquery-ui-1.10.3.custom.js' %}
+<!-- end fanstatic resources -->
+
+<script>
+    window.onload=function(){
+        $(function() {
+            $( "#sortable" ).sortable();
+            $( "#sortable" ).disableSelection();
+        });
+
+        //before form submission, need to place the values (in order) from the li elements into a hidden field
+        $( "#reorder_form" ).submit(function( event ) {
+            var res_list = new Array();
+            $( '.resource' ).each(function(i, obj) {
+                res_list[i] = obj.id;
+            });
+
+            var res_joined = res_list.join(';');
+            $( '#hidden-resources').attr('value', res_joined);
+            return;
+        });
+    };
+</script>
+
+{% endblock %}
+

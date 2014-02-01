@@ -1,0 +1,40 @@
+
+{% extends 'page.html' %}
+
+{% block breadcrumb_content %}
+  <li class="active">{{ 'Reorder' }}</li>
+{% endblock %}
+
+{% block primary_content %}
+  <div class="module-content">
+    <p>Please form URL like this: {base_url}/reorder/{dataset_name}</p>
+  </div>
+{% endblock %}
+
+{% block secondary_content %}
+  <aside class="secondary">
+    <div class="module module-narrow module-shallow">
+      <h2 class="module-heading">
+      <i class="icon-info-sign"></i>
+      Reorder
+      </h2>
+      <div class="module-content">
+        <p>Bad URL</p>
+      </div>
+    </div>
+  </aside>
+
+{% resource 'ckanext-reorder/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.css' %}
+{% resource 'ckanext-reorder/jquery-ui-1.10.3.custom/css/reorder.css' %}
+{% resource 'ckanext-reorder/jquery-ui-1.10.3.custom/js/fix/jquery-ui-1.10.3.custom.js' %}
+
+<script>
+  window.onload=function(){
+      $(function() {
+          $( "#sortable" ).sortable();
+          $( "#sortable" ).disableSelection();
+      });
+  };
+</script>
+
+{% endblock %}
